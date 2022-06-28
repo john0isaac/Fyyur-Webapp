@@ -19,6 +19,7 @@ docs/_build/
 .vscode
 __pycache__/
 node_modules/
+migrations/
 
 # Coverage reports
 htmlcov/
