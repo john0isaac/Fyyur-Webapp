@@ -11,6 +11,7 @@ Jinja2==3.0.3
 Mako==1.2.0
 Markdown==2.6.9
 MarkupSafe==2.0.1
+psycopg2==2.7.4
 postgres
 SQLAlchemy==1.1.13
 Werkzeug==2.0.3
