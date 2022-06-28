@@ -18,6 +18,7 @@ build/
 docs/_build/
 .vscode
 __pycache__/
+node_modules/
 
 # Coverage reports
 htmlcov/
@@ -26,3 +27,5 @@ htmlcov/
 *,cover
 
 notes.txt
+package-lock.json
+package.json
