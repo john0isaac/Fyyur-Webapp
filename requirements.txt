@@ -13,5 +13,5 @@ Markdown==2.6.9
 MarkupSafe==2.0.1
 psycopg2==2.7.4
 postgres
-SQLAlchemy==1.1.13
+SQLAlchemy==1.4.39
 Werkzeug==2.0.3
