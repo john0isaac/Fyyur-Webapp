@@ -76,6 +76,7 @@
 </section>
 
 <a href="/venues/{{ venue.id }}/edit"><button class="btn btn-primary btn-lg">Edit</button></a>
+<a href="/"><button onclick="fetch('/venues/{{ venue.id }}/delete', {method: 'DELETE'});" class="btn btn-danger btn-lg">Delete</button></a>
 
 {% endblock %}
 
