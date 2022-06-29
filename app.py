@@ -355,7 +355,7 @@ def edit_venue(venue_id):
     "state": data.state,
     "phone": data.phone,
     "website": data.website,
-    "facebook_link": data.facebook,
+    "facebook_link": data.facebook_link,
     "seeking_talent": data.seeking_talent,
     "seeking_description": data.seeking_description,
     "image_link": data.image_link,
@@ -369,6 +369,7 @@ def edit_venue_submission(venue_id):
   # venue record with ID <venue_id> using the new attributes
   try:
     data = Venue.query.get(venue_id)
+
     data.name = request.form.get('name')
     data.genres = ', '.join(request.form.getlist('genres'))
     data.address = request.form.get('address')
@@ -376,6 +377,10 @@ def edit_venue_submission(venue_id):
     data.state = request.form.get('state')
     data.phone = request.form.get('phone')
     data.facebook_link = request.form.get('facebook_link')
+    data.image_link = request.form.get('image_link')
+    data.website = request.form.get('website_link')
+    data.seeking_talent = True if request.form.get('seeking_talent')!=None else False
+    data.seeking_description = request.form.get('seeking_description')
     db.session.add(data)
     db.session.commit()
   except:
