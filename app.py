@@ -160,13 +160,18 @@ def create_venue_submission():
   error = False
   try:
     data = Venue()
-    data.name = request.form['name']
+    data.name = request.form.get('name')
     data.genres = ', '.join(request.form.getlist('genres'))
-    data.address = request.form['address']
-    data.city = request.form['city']
-    data.state = request.form['state']
-    data.phone = request.form['phone']
-    data.facebook_link = request.form['facebook_link']
+    data.address = request.form.get('address')
+    data.city = request.form.get('city')
+    data.state = request.form.get('state')
+    data.phone = request.form.get('phone')
+    data.facebook_link = request.form.get('facebook_link')
+    data.image_link = request.form.get('image_link')
+    data.website = request.form.get('website_link')
+    data.seeking_talent = True if request.form.get('seeking_talent')!= None else False
+    data.seeking_description = request.form.get('seeking_description')
+
     db.session.add(data)
     db.session.commit()
   except:
@@ -176,9 +181,9 @@ def create_venue_submission():
   finally:
     db.session.close()
   if not error:
-    flash('Venue ' + request.form['name'] + ' was successfully listed!')
+    flash('Venue ' + request.form.get('name') + ' was successfully listed!')
   else:
-    flash('An error occurred. Venue ' + request.form['name'] + ' could not be listed.')
+    flash('An error occurred. Venue ' + request.form.get('name') + ' could not be listed.')
     abort(500)
   return render_template('pages/home.html')
   # TODO: insert form data as a new Venue record in the db, instead
@@ -303,8 +308,8 @@ def edit_artist(artist_id):
     "city": data.city,
     "state": data.state,
     "phone": data.phone,
-    "website": data.website,
-    "facebook_link": data.facebook,
+    "website_link": data.website,
+    "facebook_link": data.facebook_link,
     "seeking_venue": data.seeking_venue,
     "seeking_description": data.seeking_description,
     "image_link": data.image_link,
@@ -318,12 +323,18 @@ def edit_artist_submission(artist_id):
   # artist record with ID <artist_id> using the new attributes
   try:
     data = Artist.query.get(artist_id)
-    data.name = request.form['name']
+
+    # using request.form.get is safer than accessing the value directly to handel null cases
+    data.name = request.form.get('name')
     data.genres = ', '.join(request.form.getlist('genres'))
-    data.city = request.form['city']
-    data.state = request.form['state']
-    data.phone = request.form['phone']
-    data.facebook_link = request.form['facebook_link']
+    data.city = request.form.get('city')
+    data.state = request.form.get('state')
+    data.phone = request.form.get('phone')
+    data.facebook_link = request.form.get('facebook_link')
+    data.image_link = request.form.get('image_link')
+    data.website = request.form.get('website_link')
+    data.seeking_venue = True if request.form.get('seeking_venue')!=None else False
+    data.seeking_description = request.form.get('seeking_description')
     db.session.add(data)
     db.session.commit()
   except:
@@ -360,13 +371,13 @@ def edit_venue_submission(venue_id):
   # venue record with ID <venue_id> using the new attributes
   try:
     data = Venue.query.get(venue_id)
-    data.name = request.form['name']
+    data.name = request.form.get('name')
     data.genres = ', '.join(request.form.getlist('genres'))
-    data.address = request.form['address']
-    data.city = request.form['city']
-    data.state = request.form['state']
-    data.phone = request.form['phone']
-    data.facebook_link = request.form['facebook_link']
+    data.address = request.form.get('address')
+    data.city = request.form.get('city')
+    data.state = request.form.get('state')
+    data.phone = request.form.get('phone')
+    data.facebook_link = request.form.get('facebook_link')
     db.session.add(data)
     db.session.commit()
   except:
@@ -392,12 +403,12 @@ def create_artist_submission():
   error = False
   try:
     data = Artist()
-    data.name = request.form['name']
+    data.name = request.form.get('name')
     data.genres = ', '.join(request.form.getlist('genres'))
-    data.city = request.form['city']
-    data.state = request.form['state']
-    data.phone = request.form['phone']
-    data.facebook_link = request.form['facebook_link']
+    data.city = request.form.get('city')
+    data.state = request.form.get('state')
+    data.phone = request.form.get('phone')
+    data.facebook_link = request.form.get('facebook_link')
     db.session.add(data)
     db.session.commit()
   except:
@@ -407,9 +418,9 @@ def create_artist_submission():
   finally:
     db.session.close()
   if not error:
-    flash('Artist ' + request.form['name'] + ' was successfully listed!')
+    flash('Artist ' + request.form.get('name') + ' was successfully listed!')
   else:
-    flash('An error occurred. Artist ' + request.form['name'] + ' could not be listed.')
+    flash('An error occurred. Artist ' + request.form.get('name') + ' could not be listed.')
     abort(500)
   # on successful db insert, flash success
   # TODO: on unsuccessful db insert, flash an error instead.
@@ -453,9 +464,9 @@ def create_show_submission():
   error=False
   try:
     data = Show()
-    data.venue_id = request.form['venue_id']
-    data.artist_id = request.form['artist_id']
-    data.start_time = request.form['start_time']
+    data.venue_id = request.form.get('venue_id')
+    data.artist_id = request.form.get('artist_id')
+    data.start_time = request.form.get('start_time')
     db.session.add(data)
     db.session.commit()
   except:

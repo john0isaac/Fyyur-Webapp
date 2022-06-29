@@ -12,3 +12,8 @@ INSERT INTO "Show" VALUES (2, 3, 5, '2019-06-15T23:00:00.000Z');
 INSERT INTO "Show" VALUES (3, 3, 6, '2035-04-01T20:00:00.000Z');
 INSERT INTO "Show" VALUES (4, 3, 6, '2035-04-08T20:00:00.000Z');
 INSERT INTO "Show" VALUES (5, 3, 6, '2035-04-15T20:00:00.000Z');
+
+-- Fix Id Sequence
+SELECT setval('"Venue_id_seq"', (SELECT MAX(id) from "Venue"));
+SELECT setval('"Artist_id_seq"', (SELECT MAX(id) from "Artist"));
+SELECT setval('"Show_id_seq"', (SELECT MAX(id) from "Show"));
