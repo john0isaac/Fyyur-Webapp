@@ -379,7 +379,7 @@ def edit_venue_submission(venue_id):
     data.facebook_link = request.form.get('facebook_link')
     data.image_link = request.form.get('image_link')
     data.website = request.form.get('website_link')
-    data.seeking_talent = True if request.form.get('seeking_talent')!=None else False
+    data.seeking_talent = True if request.form.get('seeking_talent')!= None else False
     data.seeking_description = request.form.get('seeking_description')
     db.session.add(data)
     db.session.commit()
@@ -412,6 +412,10 @@ def create_artist_submission():
     data.state = request.form.get('state')
     data.phone = request.form.get('phone')
     data.facebook_link = request.form.get('facebook_link')
+    data.image_link = request.form.get('image_link')
+    data.website = request.form.get('website_link')
+    data.seeking_venue = True if request.form.get('seeking_venue')!= None else False
+    data.seeking_description = request.form.get('seeking_description')
     db.session.add(data)
     db.session.commit()
   except:
