@@ -5,6 +5,7 @@ flask-moment==0.11.0
 flask-wtf==0.14.3
 flask_sqlalchemy==2.4.4
 Flask_Migrate==3.1.0
+Flask-Script==2.0.6
 gunicorn==20.0.4
 itsdangerous==0.24
 Jinja2==3.0.3
