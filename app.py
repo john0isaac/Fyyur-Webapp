@@ -13,7 +13,7 @@ from logging import Formatter, FileHandler
 from flask_wtf import Form
 from forms import *
 from datetime import datetime, timezone
-from sqlalchemy import or_
+from sqlalchemy import or_, desc
 import sys
 #----------------------------------------------------------------------------#
 # App Config.
@@ -461,7 +461,7 @@ def shows():
   # TODO: replace with real venues data.
   #       num_shows should be aggregated based on number of upcoming shows per venue.
   data = []
-  shows = db.session.query(Show).all()
+  shows = db.session.query(Show).order_by(desc(Show.start_time)).all()
   for show in shows:
         artist = db.session.query(Artist.name, Artist.image_link).filter(Artist.id == show.artist_id).one()
         venue = db.session.query(Venue.name).filter(Venue.id == show.venue_id).one()
