@@ -201,6 +201,7 @@ def delete_venue(venue_id):
   # SQLAlchemy ORM to delete a record. Handle cases where the session commit could fail.
   error = False
   try:
+    Show.query.filter_by(venue_id=venue_id).delete()
     Venue.query.filter_by(id=venue_id).delete()
     db.session.commit()
   except:
@@ -440,6 +441,7 @@ def delete_artist(artist_id):
   # SQLAlchemy ORM to delete a record. Handle cases where the session commit could fail.
   error = False
   try:
+    Show.query.filter_by(artist_id=artist_id).delete()
     Artist.query.filter_by(id=artist_id).delete()
     db.session.commit()
   except:
